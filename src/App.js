@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Container, Header, Title, Content, Button, Icon } from 'native-base';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
+import myTheme from './themes/myTheme';
 
 class App extends Component {
 
@@ -21,7 +22,7 @@ class App extends Component {
 	render() {
 		return (
 			<Provider store={createStore(reducers)}>
-				<Container>
+				<Container theme={myTheme}>
 					<Header>
 						<Button transparent>
 							<Icon name='ios-menu' />
