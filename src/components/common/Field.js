@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { ListItem, Input, Text } from 'native-base';
+import { Input, Text } from 'native-base';
 
 const Field = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
 	const { inputStyle, labelStyle, containerStyle } = styles;
@@ -30,7 +30,8 @@ const styles = {
 	},
 	labelStyle: {
 		width: 100,
-		padding: 8
+		padding: 8,
+		color: '#808080'
 	},
 	containerStyle: {
 		marginLeft: 8,

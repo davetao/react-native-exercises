@@ -22,7 +22,9 @@ class LoginForm extends Component {
 									placeholder="minimum 6 characters"
 								/>
 							</View>
-							<Button style={{ margin: 16, alignSelf: 'center' }}>
+							<Button
+								onPress={}
+								style={{ margin: 16, alignSelf: 'center' }}>
 								Log in / Register
 							</Button>
 						</CardItem>
