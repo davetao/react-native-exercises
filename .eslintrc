@@ -3,6 +3,7 @@
   "rules": {
     "no-global-assign": "off",
     "arrow-body-style": "off",
-    "no-unsafe-negation": "off"
+    "no-unsafe-negation": "off",
+    "brace-style": "off"
   }
 }

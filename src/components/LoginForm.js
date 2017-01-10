@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Container, Content, Card, CardItem, Button } from 'native-base';
+import Color from '../themes/myTheme';
+import { Container, Content, Card, CardItem, Button, Spinner, Icon } from 'native-base';
 import { Field } from './common';
-import { emailChangedAction, passwordChangedAction } from '../actions/';
+import { emailChangedAction, passwordChangedAction, loginUser } from '../actions/';
 
 class LoginForm extends Component {
 
@@ -15,12 +16,39 @@ class LoginForm extends Component {
 		this.props.passwordChangedAction(pwd);
 	}
 
+	onLogin() {
+		const { email, password } = this.props;
+		this.props.loginUser({ email, password });
+	}
+
+	renderError() {
+		if (this.props.error) {
+			return (
+				<Button bordered danger style={{ marginTop: 16, alignSelf: 'center' }}>
+					{ this.props.error }
+				</Button>
+			);
+		}
+	}
+
+	renderButton() {
+		if (this.props.loading) {
+			return <Spinner color={Color.brandPrimary} style={{ alignSelf: 'center' }} />;
+		}
+
+		return (
+			<Button style={{ margin: 16, marginLeft: 0 }} onPress={this.onLogin.bind(this)}>
+				Log in / Register
+			</Button>
+		);
+	}
+
 	render() {
 		return (
 			<Container style={{ margin: 16 }}>
 				<Content>
 					<Card>
-						<CardItem>
+						<CardItem style={{ paddingLeft: 16, paddingRight: 16 }}>
 							<View style={{ marginTop: 8 }}>
 								<Field
 									onChangeText={this.onEmailChange.bind(this)}
@@ -36,9 +64,11 @@ class LoginForm extends Component {
 									placeholder="minimum 6 characters"
 								/>
 							</View>
-							<Button style={{ margin: 16 }}>
-								Log in / Register
-							</Button>
+
+							{ this.renderError() }
+
+							{ this.renderButton() }
+
 						</CardItem>
 					</Card>
 				</Content>
@@ -47,11 +77,11 @@ class LoginForm extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		email: state.auth.email,
-		password: state.auth.password
-	};
+const mapStateToProps = ({ auth }) => {
+	const { email, password, error, loading, user } = auth;
+	return { email, password, error, loading, user };
 };
 
-export default connect(mapStateToProps, { emailChangedAction, passwordChangedAction })(LoginForm);
+export default connect(mapStateToProps, {
+	emailChangedAction, passwordChangedAction, loginUser
+})(LoginForm);

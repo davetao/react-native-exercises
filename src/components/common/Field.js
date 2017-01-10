@@ -30,12 +30,11 @@ const styles = {
 	},
 	labelStyle: {
 		width: 100,
-		padding: 8,
+		paddingTop: 8,
+		paddingBottom: 8,
 		color: '#808080'
 	},
 	containerStyle: {
-		marginLeft: 8,
-		marginRight: 16,
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center'

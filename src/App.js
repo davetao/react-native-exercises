@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import { Container, Header, Title, Content, Button, Icon } from 'native-base';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import LoginForm from './components/LoginForm';
 import myTheme from './themes/myTheme';
@@ -20,8 +21,9 @@ class App extends Component {
 	}
 
 	render() {
+		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 		return (
-			<Provider store={createStore(reducers)}>
+			<Provider store={store}>
 				<Container theme={myTheme}>
 					<Header>
 						<Button transparent>
