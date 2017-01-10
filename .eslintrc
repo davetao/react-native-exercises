@@ -4,6 +4,7 @@
     "no-global-assign": "off",
     "arrow-body-style": "off",
     "no-unsafe-negation": "off",
-    "brace-style": "off"
+    "brace-style": "off",
+    "max-len": "off"
   }
 }

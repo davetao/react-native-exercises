@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import Color from '../themes/myTheme';
-import { Container, Content, Card, CardItem, Button, Spinner, Icon } from 'native-base';
+import { Container, Header, Title, Content, Card, CardItem, Button, Spinner, Icon } from 'native-base';
+import myTheme from '../themes/myTheme';
 import { Field } from './common';
 import { emailChangedAction, passwordChangedAction, loginUser } from '../actions/';
 
@@ -33,7 +33,7 @@ class LoginForm extends Component {
 
 	renderButton() {
 		if (this.props.loading) {
-			return <Spinner color={Color.brandPrimary} style={{ alignSelf: 'center' }} />;
+			return <Spinner color={myTheme.brandPrimary} style={{ alignSelf: 'center' }} />;
 		}
 
 		return (
@@ -45,32 +45,43 @@ class LoginForm extends Component {
 
 	render() {
 		return (
-			<Container style={{ margin: 16 }}>
+
+			<Container theme={myTheme}>
+				<Header>
+					<Button transparent>
+						<Icon name='ios-menu' />
+					</Button>
+					<Title>Manager</Title>
+				</Header>
 				<Content>
-					<Card>
-						<CardItem style={{ paddingLeft: 16, paddingRight: 16 }}>
-							<View style={{ marginTop: 8 }}>
-								<Field
-									onChangeText={this.onEmailChange.bind(this)}
-									value={this.props.email}
-									label="Email"
-									placeholder="email@domain.com"
-								/>
-								<Field
-									secureTextEntry
-									onChangeText={this.onPasswordChange.bind(this)}
-									value={this.props.password}
-									label="Password"
-									placeholder="minimum 6 characters"
-								/>
-							</View>
+					<Container style={{ margin: 16 }}>
+						<Content>
+							<Card>
+								<CardItem style={{ paddingLeft: 16, paddingRight: 16 }}>
+									<View style={{ marginTop: 8 }}>
+										<Field
+											onChangeText={this.onEmailChange.bind(this)}
+											value={this.props.email}
+											label="Email"
+											placeholder="email@domain.com"
+										/>
+										<Field
+											secureTextEntry
+											onChangeText={this.onPasswordChange.bind(this)}
+											value={this.props.password}
+											label="Password"
+											placeholder="minimum 6 characters"
+										/>
+									</View>
 
-							{ this.renderError() }
+									{ this.renderError() }
 
-							{ this.renderButton() }
+									{ this.renderButton() }
 
-						</CardItem>
-					</Card>
+								</CardItem>
+							</Card>
+						</Content>
+					</Container>
 				</Content>
 			</Container>
 		);
