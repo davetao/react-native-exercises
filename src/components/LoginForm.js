@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Container, Content, Card, CardItem, Button, H3 } from 'native-base';
+import { connect } from 'react-redux';
+import { Container, Content, Card, CardItem, Button } from 'native-base';
 import { Field } from './common';
+import { emailChangedAction, passwordChangedAction } from '../actions/';
 
 class LoginForm extends Component {
+
+	onEmailChange(text) {
+		this.props.emailChangedAction(text);
+	}
+
+	onPasswordChange(pwd) {
+		this.props.passwordChangedAction(pwd);
+	}
+
 	render() {
 		return (
 			<Container style={{ margin: 16 }}>
@@ -11,20 +22,21 @@ class LoginForm extends Component {
 					<Card>
 						<CardItem>
 							<View style={{ marginTop: 8 }}>
-								<H3 style={{ marginLeft: 16, marginTop: 8, marginBottom: 8 }}>Please sign in</H3>
 								<Field
+									onChangeText={this.onEmailChange.bind(this)}
+									value={this.props.email}
 									label="Email"
 									placeholder="email@domain.com"
 								/>
 								<Field
-									label="Password"
 									secureTextEntry
+									onChangeText={this.onPasswordChange.bind(this)}
+									value={this.props.password}
+									label="Password"
 									placeholder="minimum 6 characters"
 								/>
 							</View>
-							<Button
-								onPress={}
-								style={{ margin: 16, alignSelf: 'center' }}>
+							<Button style={{ margin: 16 }}>
 								Log in / Register
 							</Button>
 						</CardItem>
@@ -35,4 +47,11 @@ class LoginForm extends Component {
 	}
 }
 
-export default LoginForm;
+const mapStateToProps = state => {
+	return {
+		email: state.auth.email,
+		password: state.auth.password
+	};
+};
+
+export default connect(mapStateToProps, { emailChangedAction, passwordChangedAction })(LoginForm);
