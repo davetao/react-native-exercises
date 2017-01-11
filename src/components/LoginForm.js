@@ -45,12 +45,8 @@ class LoginForm extends Component {
 
 	render() {
 		return (
-
 			<Container theme={myTheme}>
 				<Header>
-					<Button transparent>
-						<Icon name='ios-menu' />
-					</Button>
 					<Title>Manager</Title>
 				</Header>
 				<Content>
