@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import { Container, Header, Title, Content, Button, Icon, Text } from 'native-base';
+import { List } from 'react-native';
+import { Container, Header, Title, Content, Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { employeeFetch } from '../actions';
+
 import myTheme from '../themes/myTheme';
 
 class EmployeeList extends Component {
+	
+	componentWillMount() {
+		this.props.employeeFetch();
+	}
+	
 	render() {
 		return (
 			<Container theme={myTheme}>
@@ -18,13 +26,11 @@ class EmployeeList extends Component {
 					</Button>
 				</Header>
 				<Content>
-					<View>
-
-					</View>
+				
 				</Content>
 			</Container>
 		);
 	}
 }
 
-export default EmployeeList;
+export default connect(null, { employeeFetch })(EmployeeList);
