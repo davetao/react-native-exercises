@@ -5,9 +5,15 @@ import { Container, Header, Title, Content, Card, CardItem, Button, Icon, Text, 
 import { Actions } from 'react-native-router-flux';
 import { Field } from './common/Field';
 import myTheme from '../themes/myTheme';
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeCreate } from '../actions';
 
 class EmployeeCreate extends Component {
+	
+	onButtonPress() {
+		const { name, phone, shift } = this.props;
+		this.props.employeeCreate({ name, phone, shift });
+	}
+	
 	render() {
 		return (
 			<Container theme={myTheme}>
@@ -16,7 +22,7 @@ class EmployeeCreate extends Component {
 						<Icon name="md-arrow-back" />
 					</Button>
 					<Title>Create Employee</Title>
-					<Button transparent>
+					<Button transparent onPress={this.onButtonPress.bind(this)}>
 						<Icon name="md-done-all" />
 					</Button>
 				</Header>
@@ -81,4 +87,4 @@ const mapStateToProps = (state) => {
 	return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeUpdate, employeeCreate })(EmployeeCreate);
