@@ -28,7 +28,7 @@ class EmployeeEdit extends Component {
 		return (
 			<Container theme={myTheme}>
 				<Header>
-					<Button transparent onPress={() => Actions.pop()}>
+					<Button transparent onPress={() => Actions.employeeList({ type: 'reset' })}>
 						<Icon name="md-arrow-back" />
 					</Button>
 					<Title>Update Employee</Title>

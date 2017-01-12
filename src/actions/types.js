@@ -9,3 +9,4 @@ export const EMPLOYEE_DELETE = 'employee_delete';
 export const EMPLOYEE_CREATED = 'employee_submit';
 export const EMPLOYEE_FETCH_SUCCESS = 'employee_found';
 export const EMPLOYEE_SAVED = 'employee_saved';
+export const EMPLOYEE_RESET = 'employee_reset';

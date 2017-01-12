@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { Container, Header, Title, Content, Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import myTheme from '../themes/myTheme';
-import { employeeUpdateAction, employeeCreateAction } from '../actions';
+import { employeeUpdateAction, employeeCreateAction, employeeResetAction } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 class EmployeeCreate extends Component {
+	
+	componentWillMount() {
+		this.props.employeeResetAction();
+	}
 	
 	onButtonPress() {
 		const { name, phone, shift } = this.props;
@@ -17,7 +21,7 @@ class EmployeeCreate extends Component {
 		return (
 			<Container theme={myTheme}>
 				<Header>
-					<Button transparent onPress={() => Actions.pop()}>
+					<Button transparent onPress={() => Actions.employeeList({ type: 'reset' })}>
 						<Icon name="md-arrow-back" />
 					</Button>
 					<Title>Create Employee</Title>
@@ -38,4 +42,4 @@ const mapStateToProps = (state) => {
 	return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdateAction, employeeCreateAction })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeUpdateAction, employeeCreateAction, employeeResetAction })(EmployeeCreate);
