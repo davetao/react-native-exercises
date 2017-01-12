@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { Container, Header, Title, Content, Button, Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import myTheme from '../themes/myTheme';
-import { employeeUpdateAction, employeeCreateAction } from '../actions';
+import { employeeUpdateAction, employeeSaveAction } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
-class EmployeeCreate extends Component {
+class EmployeeEdit extends Component {
 	
-	onButtonPress() {
+	componentWillMount() {
+		_.each(this.props.employee, (value, prop) => {
+			this.props.employeeUpdateAction({ prop, value });
+		});
+	}
+	
+	updateEmployee() {
 		const { name, phone, shift } = this.props;
-		this.props.employeeCreateAction({ name, phone, shift });
+		this.props.employeeSaveAction({ name, phone, shift, uid: this.props.employee.uid });
+	}
+	
+	deleteEmployee() {
+	
 	}
 	
 	render() {
@@ -20,13 +31,16 @@ class EmployeeCreate extends Component {
 					<Button transparent onPress={() => Actions.pop()}>
 						<Icon name="md-arrow-back" />
 					</Button>
-					<Title>Create Employee</Title>
-					<Button transparent onPress={this.onButtonPress.bind(this)}>
+					<Title>Update Employee</Title>
+					<Button transparent onPress={this.deleteEmployee.bind(this)}>
+						<Icon name="md-remove-circle" />
+					</Button>
+					<Button transparent onPress={this.updateEmployee.bind(this)}>
 						<Icon name="md-done-all" />
 					</Button>
 				</Header>
 				<Content>
-					<EmployeeForm {...this.props} />
+					<EmployeeForm />
 				</Content>
 			</Container>
 		);
@@ -38,4 +52,4 @@ const mapStateToProps = (state) => {
 	return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdateAction, employeeCreateAction })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeUpdateAction, employeeSaveAction })(EmployeeEdit);

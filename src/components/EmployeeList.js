@@ -4,7 +4,7 @@ import { Container, Header, Title, Content, Button, Icon } from 'native-base';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { employeeFetch } from '../actions';
+import { employeeFetchAction } from '../actions';
 import EmployeeListItem from './EmployeeListItem';
 
 import myTheme from '../themes/myTheme';
@@ -12,7 +12,7 @@ import myTheme from '../themes/myTheme';
 class EmployeeList extends Component {
 	
 	componentWillMount() {
-		this.props.employeeFetch();
+		this.props.employeeFetchAction();
 		this.createDataSource(this.props);
 	}
 	
@@ -62,4 +62,4 @@ const mapStateToProps = state => {
 	return { employees };
 };
 
-export default connect(mapStateToProps, { employeeFetch })(EmployeeList);
+export default connect(mapStateToProps, { employeeFetchAction })(EmployeeList);
